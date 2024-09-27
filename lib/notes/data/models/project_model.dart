@@ -12,9 +12,9 @@ class ProjectModel extends HiveObject{
   @HiveField(3)
   final int color;
   @HiveField(4)
-  final taskModel taskmodel;
+  final taskModel? taskmodel;
 
-  ProjectModel(this.taskmodel, {required this.project_title,  this.content,  this.date, required this.color});
+  ProjectModel({this.taskmodel, required this.project_title,  this.content,  this.date, required this.color});
   
 }
 

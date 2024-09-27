@@ -17,7 +17,7 @@ class ProjectModelAdapter extends TypeAdapter<ProjectModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return ProjectModel(
-      fields[4] as taskModel,
+      taskmodel:fields[4] as taskModel?,
       project_title: fields[0] as String,
       content: fields[1] as String?,
       date: fields[2] as String?,

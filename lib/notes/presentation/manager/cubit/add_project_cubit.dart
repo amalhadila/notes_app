@@ -14,6 +14,7 @@ class AddProjectCubit extends Cubit<AddProjectState> {
      emit(AddProjectsuccess());
     }catch(failure){
      emit(AddProjectfailure(failure.toString()));
+     print(failure);
     }
 
   }
