@@ -4,10 +4,9 @@ part of 'view_projects_cubit.dart';
 sealed class ViewProjectsState {}
 
 final class ViewProjectsInitial extends ViewProjectsState {}
-final class ViewProjectloading extends ViewProjectsState {}
-final class ViewProjectsuccess extends ViewProjectsState {}
-final class ViewProjectfailure extends ViewProjectsState {
-  final String? errormassage;
+final class ViewProjectsuccess extends ViewProjectsState {
+  final List<ProjectModel>? projectslist;
 
-  ViewProjectfailure({ this.errormassage});
+  ViewProjectsuccess({ this.projectslist});
+
 }

@@ -8,4 +8,11 @@ class RepoImplemetation implements TasksRepo {
    await project_box.add(project);
 
   }
+  @override
+   List<ProjectModel> fetch_project() {
+    var project_box=Hive.box<ProjectModel>('project_box');
+    print('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh $project_box.values.toList()');
+    return project_box.values.toList();
+      
+  }
 }

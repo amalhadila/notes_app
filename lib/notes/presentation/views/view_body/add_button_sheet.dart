@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:notes/notes/data/models/project_model.dart';
 import 'package:notes/notes/presentation/manager/cubit/add_project_cubit.dart';
+import 'package:notes/notes/presentation/manager/cubit/view_projects_cubit.dart';
 import 'package:notes/notes/presentation/repo/repo_implemetation.dart';
+import 'package:notes/notes/presentation/views/view_body/colors_listView.dart';
 import 'package:notes/notes/presentation/views/view_body/custom_buttom.dart';
 import 'package:notes/notes/presentation/views/view_body/custom_text_field.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,10 +36,10 @@ class AddButtonSheet extends StatelessWidget {
         builder: (context, state) {
           return AbsorbPointer(
             absorbing: state is AddProjectloading? true : false,
-            child: const Padding(
+            child:  Padding(
                 padding:
-                    EdgeInsets.only(top: 32.0, right: 16, left: 16, bottom: 32),
-                child: SingleChildScrollView(
+                    EdgeInsets.only(top: 32.0, right: 16, left: 16, bottom: MediaQuery.of(context).viewInsets.bottom),
+                child: const SingleChildScrollView(
                   child: buttom_sheet_form(),
                 )),
           );
@@ -61,7 +62,9 @@ class _buttom_sheet_formState extends State<buttom_sheet_form> {
   @override
   final GlobalKey<FormState> formkey = GlobalKey();
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
-  String? title, subtitle;
+  int task_num=1;
+    List<String?> subtitle = [];
+  String? title ;
   Widget build(BuildContext context) {
     return Form(
       key: formkey,
@@ -77,13 +80,42 @@ class _buttom_sheet_formState extends State<buttom_sheet_form> {
           const SizedBox(
             height: 12,
           ),
-          CustomTextField(
-            onsaved: (value) {
-              subtitle = value;
-            },
-            hintText: 'Content',
-            maxlins: 5,
+          SizedBox(
+            height: 150,
+            child: ListView.builder(
+              itemBuilder: (context, index) {
+               return Column(
+                 children: [                  
+                   CustomTextField(
+                    onsaved: (value) {
+                      subtitle.add(value) ;
+                    },
+                    hintText: ' Task ${index++}',
+                    maxlins: 3,
+                                 ),
+                    const SizedBox(
+            height: 12
+          ),             
+                 ],
+               );
+              },
+              itemCount: task_num ,
+             
+            ),
           ),
+          
+          IconButton(
+            onPressed: (){
+              task_num++;
+              setState(() {
+                
+              });
+            },
+            icon:Icon(Icons.add)),
+            const SizedBox(
+            height: 35,
+          ),
+            Center(child: ColorsListview()),
           const SizedBox(
             height: 45,
           ),
@@ -95,10 +127,21 @@ class _buttom_sheet_formState extends State<buttom_sheet_form> {
                 onPressed: () {
                   if (formkey.currentState!.validate()) {
                     formkey.currentState!.save();
+                     List<taskModel> tasks = subtitle
+                        .where((task) => task != null && task.isNotEmpty) 
+                        .map((task) => taskModel(
+                              task_title: task!,
+                              color: Colors.blue.value,
+                            ))
+                        .toList();
+
                     ProjectModel project = ProjectModel(
-                        project_title: title!, color: Colors.blue.value);
+                        project_title: title!, content: '',taskmodel:tasks,color: Colors.blue.value);
                     BlocProvider.of<AddProjectCubit>(context)
                         .add_project(project);
+
+                    BlocProvider.of<ViewProjectsCubit>(context).fetch_all_projects();    
+                    
                   } else {
                     autovalidateMode = AutovalidateMode.always;
                     setState(() {});

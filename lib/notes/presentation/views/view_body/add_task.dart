@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:notes/notes/data/models/project_model.dart';
+import 'package:notes/notes/presentation/manager/cubit/view_projects_cubit.dart';
 import 'package:notes/notes/presentation/views/view_body/custom_appbar.dart';
 import 'package:notes/notes/presentation/views/view_body/custom_text_field.dart';
+import 'package:notes/notes/presentation/views/your_notes_view.dart';
 
 class AddTask extends StatefulWidget {
-  const AddTask({super.key});
+  const AddTask({super.key, required this.project});
+  final ProjectModel project;
 
   @override
   State<AddTask> createState() => _AddTaskState();
@@ -11,21 +16,32 @@ class AddTask extends StatefulWidget {
 
 class _AddTaskState extends State<AddTask> {
   @override
-   GlobalKey<FormState> formkey=GlobalKey();
+   GlobalKey<FormState> formkey =GlobalKey();
  AutovalidateMode autovalidateMode=AutovalidateMode.disabled;
    String?  title, subtitle;
 
   Widget build(BuildContext context) {
     return  Padding(
-      padding: EdgeInsets.only(top:40.0,right: 5,left: 5),
+      padding: const EdgeInsets.only(top:40.0,right: 5,left: 5),
       child: Column(
         children: [
           CustomAppbar(
             appbar_title: 'New Task',
             appicon: Icons.add,
-            onPressed: (){
+            onPressed: () async{
               if(formkey.currentState!.validate()){
                 formkey.currentState!.save();
+               widget.project.taskmodel!.add(taskModel(task_title: title!));
+               await widget.project.save();
+               BlocProvider.of<ViewProjectsCubit>(context).fetch_all_projects();  
+                Navigator.push(context, MaterialPageRoute(builder: (context){
+                                                   return YournotesView() ;
+                                                         }));
+               ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Task added succefully'),
+               backgroundColor: Colors.green,
+              duration: Duration(seconds: 2),));
+
+
               }else{
                 autovalidateMode=AutovalidateMode.always;
                 setState(() {
@@ -38,21 +54,15 @@ class _AddTaskState extends State<AddTask> {
             key: formkey,
             autovalidateMode: autovalidateMode,
             child: Column(children: [
-               SizedBox(height: 30,),
+               const SizedBox(height: 30,),
                       CustomTextField(
-                        onsaved: (value) {
+                        maxlins:3,
+                        onsaved: (value){
                           title =value;
                         },
-                        hintText: 'New Task',),
-                      SizedBox(height: 20,),
-                      CustomTextField(
-                        onsaved: (value) {
-                          subtitle=value;                          
-                        },
-                        hintText: 'content',maxlins:5),
+                        hintText: 'New Task',),                     
             ],),
-          )
-                   
+          )                   
         ],
       ),
     );

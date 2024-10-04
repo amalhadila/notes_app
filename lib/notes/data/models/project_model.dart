@@ -10,9 +10,9 @@ class ProjectModel extends HiveObject{
   @HiveField(2)
   final String? date;
   @HiveField(3)
-  final int color;
+   int color;
   @HiveField(4)
-  final taskModel? taskmodel;
+    List<taskModel>? taskmodel;
 
   ProjectModel({this.taskmodel, required this.project_title,  this.content,  this.date, required this.color});
   
@@ -21,14 +21,14 @@ class ProjectModel extends HiveObject{
 @HiveType(typeId: 1)  
 class taskModel {
   @HiveField(0)
-  final String task_title;
+   String task_title;
   @HiveField(1)
-  final String? task_content;
+   bool status;
   @HiveField(2)
   final String? date;
   @HiveField(3)
-  final int color;
+  final int? color;
 
-  taskModel({required this.task_title,  this.task_content,  this.date, required this.color});
+  taskModel({required this.task_title,  this.status=false,  this.date,  this.color});
   
 }

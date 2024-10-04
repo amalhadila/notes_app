@@ -17,7 +17,7 @@ class ProjectModelAdapter extends TypeAdapter<ProjectModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return ProjectModel(
-      taskmodel:fields[4] as taskModel?,
+      taskmodel: (fields[4] as List?)?.cast<taskModel>(),
       project_title: fields[0] as String,
       content: fields[1] as String?,
       date: fields[2] as String?,
@@ -64,9 +64,9 @@ class taskModelAdapter extends TypeAdapter<taskModel> {
     };
     return taskModel(
       task_title: fields[0] as String,
-      task_content: fields[1] as String?,
+      status: fields[1] as bool,
       date: fields[2] as String?,
-      color: fields[3] as int,
+      color: fields[3] as int?,
     );
   }
 
@@ -77,7 +77,7 @@ class taskModelAdapter extends TypeAdapter<taskModel> {
       ..writeByte(0)
       ..write(obj.task_title)
       ..writeByte(1)
-      ..write(obj.task_content)
+      ..write(obj.status)
       ..writeByte(2)
       ..write(obj.date)
       ..writeByte(3)

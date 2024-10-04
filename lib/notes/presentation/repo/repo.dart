@@ -2,8 +2,10 @@ import 'package:notes/notes/data/models/project_model.dart';
 
 abstract class TasksRepo {
 
-  add_project(ProjectModel project ){
+  add_project(ProjectModel project ){}
 
+   List<ProjectModel>? fetch_project(){  
   }
+
 
 }

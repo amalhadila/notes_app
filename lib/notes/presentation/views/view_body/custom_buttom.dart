@@ -17,7 +17,7 @@ class CustomButtom extends StatelessWidget {
                   ),
       ),
       onPressed: onPressed,
-      child: isloading? CircularProgressIndicator(
+      child: isloading? const CircularProgressIndicator(
         color: Colors.white,
       ): Text('add new project',style: TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.w600,fontFamily:'inter' ),)
     );
