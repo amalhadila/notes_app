@@ -48,11 +48,13 @@ class _TaskListviewItemState extends State<TaskListviewItem> {
                   fontSize: 16,
                   fontWeight: FontWeight.w900,
                   fontFamily: 'inter',
+                  decoration: isChecked ? TextDecoration.lineThrough : TextDecoration.none,
+                  
                 ),
               ),
               leading: Container(
-                width: 37,
-                height: 37,
+                width: 35,
+                height: 35,
                 decoration: BoxDecoration(
                   color: isChecked ? Colors.grey : Colors.white,
                   border: Border.all(color: Colors.grey),

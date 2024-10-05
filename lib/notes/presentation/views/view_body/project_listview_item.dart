@@ -78,7 +78,7 @@ class ProjectListviewItem extends StatelessWidget {
                                           .showSnackBar(const SnackBar(
                                         content: Text(
                                             'project deleted successfully'),
-                                        backgroundColor: Colors.green,
+                                        backgroundColor: Color(0xff77d4fc),
                                         duration: Duration(seconds: 2),
                                       ));
                                     },

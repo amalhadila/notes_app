@@ -38,7 +38,7 @@ class _AddTaskState extends State<AddTask> {
                                                    return YournotesView() ;
                                                          }));
                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Task added succefully'),
-               backgroundColor: Colors.green,
+               backgroundColor: Color(0xff77d4fc),
               duration: Duration(seconds: 2),));
 
 

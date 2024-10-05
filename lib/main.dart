@@ -5,6 +5,7 @@ import 'package:notes/notes/data/models/project_model.dart';
 import 'package:notes/notes/presentation/manager/cubit/view_projects_cubit.dart';
 import 'package:notes/notes/presentation/repo/repo_implemetation.dart';
 import 'package:notes/notes/presentation/views/your_notes_view.dart';
+import 'package:notes/splash/presentation/views/splah_view.dart';
 import 'notes/presentation/manager/simple_bloc_observer.dart';
 
 void main() async {
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         theme: ThemeData.light().copyWith(
           scaffoldBackgroundColor:Colors.white),
-        home: YournotesView(),
+        home: SplahView(),
         debugShowCheckedModeBanner: false,
       ),
     );

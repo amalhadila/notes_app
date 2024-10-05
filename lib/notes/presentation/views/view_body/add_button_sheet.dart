@@ -27,7 +27,7 @@ class AddButtonSheet extends StatelessWidget {
           if (state is AddProjectsuccess) {
             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
               content: Text('Added successfully'),
-              backgroundColor: Colors.green,
+              backgroundColor: Color(0xff77d4fc),
               duration: Duration(seconds: 2),
             ));
             Navigator.pop(context);
@@ -131,12 +131,12 @@ class _buttom_sheet_formState extends State<buttom_sheet_form> {
                         .where((task) => task != null && task.isNotEmpty) 
                         .map((task) => taskModel(
                               task_title: task!,
-                              color: Colors.blue.value,
+                             
                             ))
                         .toList();
 
                     ProjectModel project = ProjectModel(
-                        project_title: title!, content: '',taskmodel:tasks,color: Colors.blue.value);
+                        project_title: title!, content: '',taskmodel:tasks,color: Color(0xff77d4fc).value);
                     BlocProvider.of<AddProjectCubit>(context)
                         .add_project(project);
 

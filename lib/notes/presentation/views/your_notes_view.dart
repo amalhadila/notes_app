@@ -19,9 +19,11 @@ class YournotesView extends StatelessWidget {
               },
             );
           },
+          backgroundColor: Color(0xff77d4fc),
+          shape: const CircleBorder(),
           child: Container(
             
-            child: const Icon(Icons.add)),
+            child: const Icon(Icons.add,color: Colors.white,)),
         ),
         body: const YourNoteBody());
   }
