@@ -16,8 +16,6 @@ class _SplahViewBodyState extends State<SplahViewBody> {
     });
     super.initState();
   }
-    late AnimationController animationController;
-  late Animation sizeAnimation;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -25,14 +23,8 @@ class _SplahViewBodyState extends State<SplahViewBody> {
         child:Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children:[ TweenAnimationBuilder(
-            curve: Curves.bounceIn,
-        duration: Duration(seconds: 3),
-        tween: SizeTween(begin:Size(MediaQuery.of(context).size.width*.33,MediaQuery.of(context).size.height*.15) ,end:Size(MediaQuery.of(context).size.width*.48,MediaQuery.of(context).size.height*.23)),
-        builder: (context, value, child) =>
-             Image.asset('assets/taskify-high-resolution-logo-transparent.png',width: value!.width,
-                height: value.height,fit: BoxFit.fill),
-          ),]
+          children:[ Image.asset('assets/تصميم بدون عنوان.gif',width: MediaQuery.of(context).size.width*.49,
+              height: MediaQuery.of(context).size.height*.235,fit: BoxFit.fill),]
         )),
       
     );
