@@ -13,7 +13,7 @@ class TaskListview extends StatelessWidget {
       padding: const EdgeInsets.only(left: 8.0, right: 8, top: 50),
       child: Column(
         children: [
-          const CustomAppbar(appbar_title: 'project tasks'),
+           CustomAppbar(appbar_title: project.project_title),
           const SizedBox(height: 25),
           Expanded(
             child: ListView.builder(

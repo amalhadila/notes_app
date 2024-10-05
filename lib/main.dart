@@ -25,7 +25,8 @@ class MyApp extends StatelessWidget {
     return BlocProvider(
           create: (context) => ViewProjectsCubit(RepoImplemetation())..fetch_all_projects(),
       child: MaterialApp(
-        theme: ThemeData.light(),
+        theme: ThemeData.light().copyWith(
+          scaffoldBackgroundColor:Colors.white),
         home: YournotesView(),
         debugShowCheckedModeBanner: false,
       ),

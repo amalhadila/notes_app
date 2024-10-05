@@ -51,7 +51,35 @@ class YourNoteBody extends StatelessWidget {
             },
           ),
           SizedBox(height: 20),
-          Expanded(child: ProjectListview()),
+          BlocBuilder<ViewProjectsCubit, ViewProjectsState>(
+            builder: (context, state) {
+              if (BlocProvider.of<ViewProjectsCubit>(context).allprojects!.isNotEmpty){
+              return const Expanded(
+                child:   ProjectListview(),
+                );
+                }
+              else{
+                return Expanded(
+                  child: Column(
+                      mainAxisAlignment:  MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Center(
+                          child: SizedBox(
+                            height: MediaQuery.of(context).size.height*.3,
+                            width:  MediaQuery.of(context).size.width*.6,
+                            child: Image.asset('assets/Add notes.gif',fit: BoxFit.fill,),
+                          ),
+                          
+                        ),
+                        SizedBox(height: 90),
+                      ],
+                    
+                  ),
+                );
+              }
+            },
+          ),
         ],
       ),
     );
